@@ -15,6 +15,8 @@ import reportWebVitals from './reportWebVitals';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebaseConfig';
 import { useState } from 'react';
+import  Marcador from './marcador/Ejercicio.js';
+
 
 
 
@@ -31,6 +33,7 @@ root.render(
     <Route path="/login" element={<Login />}></Route>
     <Route path="/registrarse" element={<Register />}></Route>
     <Route path="/pokemonVista/:id" element={<PokemonVista />}></Route>
+    <Route path="/marcador" element={<Marcador />}></Route>
     **<Route path="*" element={<h1>404</h1>}></Route>**
   </Routes>
 
@@ -38,7 +41,4 @@ root.render(
   </>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

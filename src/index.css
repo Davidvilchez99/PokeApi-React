@@ -13,7 +13,7 @@ code {
 } */
 
 body {
-  background-color: #ffad86;
+  background-color: rgb(255, 255, 255);
   z-index: 1;
 }
 
@@ -49,9 +49,9 @@ img {
 }
 
 .div--demo {
-  border: 2px solid #23cbff;
-  background-color: #00086f;
-  color: white;
+  border: 2px solid black;
+  background-color: gray;
+  color: black;
   padding: 1%;
   margin: 2%;
   border-radius: 10px;
@@ -74,7 +74,7 @@ h2 {
 }
 
 #search {
-  background-color: #00086f;
+  background-color: black;
   color: white;
   font-size: 1em;
   border-radius: 5px;
@@ -93,7 +93,7 @@ h2 {
 
 #limpiar {
   width: 10%;
-  background-color: #00086f;
+  background-color: black;
   color: white;
   font-size: 1em;
   border-radius: 5px;
@@ -104,20 +104,20 @@ h2 {
 .btnsInformacion {
   width: 100%;
   height: 3em;
-  background-color: brown;
-  color: white;
+  background-color: lightslategrey;
+  color: black;
   font-size: 1em;
 }
 
 .btnsInformacion:hover {
-  border: 2px solid brown;
-  background-color: #23cbff;
+  border: 2px solid gray;
+  background-color: white;
 }
 
 #infoPeliculaDiv{
   width: 100%;
     height: 40vw;
-    background-color: #00086f;
+    background-color: lightslategray;
     color: #fbfbfb;
     display: flex;
     /* align-items: stretch; */
@@ -134,9 +134,51 @@ h2 {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  border: #23cbff 1px solid;
+  border: black 1px solid;
 
 }
 #infoPeliculaDiv>div{
   width: 50%;
 }
+
+#cargarMas{
+  margin-left: 46.5%;
+  margin-bottom: 5%;
+  margin-top: 3%;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 1%;
+}
+#cargarMas:hover{
+  background-color: #fbfbfb;
+  color: black;
+}
+
+#volverPokemons{
+  margin-bottom: 5%;
+  margin-top: 3%;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 1%;
+}
+#volverPokemons:hover{
+  background-color: #fbfbfb;
+  color: black;
+}
+
+#puntuacionTabla{
+  margin: 10%;
+  border: 1px solid black;
+  width: 70vw;
+}
+#puntuacionTabla>tr,td{
+  border: 1px solid black;
+  text-align: center;
+  font-size: medium;
+  padding: 1%;
+  
+  }
+
+

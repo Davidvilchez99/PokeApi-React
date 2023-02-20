@@ -5,10 +5,6 @@ import {  useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 
-var listaPokemonsDetalles = [];
-var pokemons = [];
-
-
 export default function PokemonDetalle(props) {
   var [pokemonDetalleLista, setPokemonDetalleLista] = useState([]);
   var [imagen, setImagen] = useState("");
@@ -20,19 +16,10 @@ export default function PokemonDetalle(props) {
       .then((datos) => { 
         setPokemonDetalleLista(pokemonDetalleLista = datos);
         setImagen(imagen = datos.sprites.front_default);
-        // console.log(pokemonDetalleLista);
+        
         
       });
     }
-    function detallePokemon(){
-      // llama a la vista y le pasa pokemonDetalleLista
-      // console.log(pokemonDetalleLista);
-      // <PokemonVista pokemon={pokemonDetalleLista}/>
-      
-
-
-    }
-
     return (
       <>
       
@@ -46,8 +33,6 @@ export default function PokemonDetalle(props) {
         
       </div>
       </div>
-        {/* <li><img onClick={detallePokemon} key={pokemonDetalleLista.name} src={imagen}/>
-        <p>{pokemonDetalleLista.name}</p></li> */}
       </>
     );
   }

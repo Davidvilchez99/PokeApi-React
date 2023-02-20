@@ -28,3 +28,34 @@
  #img2 {
     filter: contrast(0%) brightness(0%);
  }
+
+ #button {
+     background-color: lightseagreen;
+     border: 2px solid black;
+     border-radius: 5px;
+     margin-left: 1%;
+     outline: none;
+ }
+ #button2 {
+     background-color: lightsalmon;
+     border-radius: 5px;
+     margin-left: 1%;
+     border: 2px solid black;
+     outline: none;
+ }
+ #input {
+     border: 2px solid black;
+     border-radius: 5px;
+     outline: none;
+     width: 15%;
+     height: 2em;
+     font-size: 1em;
+     margin-left: 1%;
+ }
+
+ label{
+        font-size: 1.5em;
+        color: black;
+ }
+
+ 

@@ -11,7 +11,6 @@ function Register(){
     function enviar() {
         createUserWithEmailAndPassword(auth, usuario, contraseña)
             .then((userCredential) => {
-                // Signed in 
                 console.log("usuario creado");
                 const user = userCredential.user;
                 const escribeDatos = async () => {   

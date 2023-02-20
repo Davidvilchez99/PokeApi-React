@@ -1,12 +1,10 @@
 import './jugar.css'
 import { useState, useEffect } from 'react';
-import ListaDatos from "../accesoDB/Ejercicio";
 import { doc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 import { db } from '../firebaseConfig.js';
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import { puntuacion} from '../accesoDB/Ejercicio';
 
 function Jugar() {
   var [estaLogueado, setLogueado] = useState("");
@@ -18,6 +16,7 @@ function Jugar() {
   var [datosUsuario, setDatosUsuario] = useState([]);
   var [userId, setUserId] = useState([]);
   useEffect(() => {
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
       setLogueado(estaLogueado = true);
@@ -26,9 +25,12 @@ function Jugar() {
        setLogueado(estaLogueado = false);
       }
     });
+    leerDatosFirestore()
   }, []);
+
   useEffect(() => detalle(),
   []);
+
   function detalle() {
     var aux = new Array();
     var aux2 = new Array();
@@ -127,42 +129,24 @@ function Jugar() {
                   setDatosUsuario(datosUsuario = listado.filter((recordatorio) => recordatorio.usuario === correo));
                     setPuntuacion(puntuacion = datosUsuario[0].puntuacion);
                     setUserId(userId = datosUsuario[0].id);
-
-              // console.log(todos, newData);
           })}
-          useEffect(() => leerDatosFirestore(),
-          []);
 
   return (
     <>
-      {/* {
-        nombres.map((nombre, index) => {
-          return <><h1 key={index}>{nombre}</h1></>
-        })
-      }
-
-      {
-        imagenes.map((imagen, index) => {
-          return <><img key={index} src={imagen}></img></>
-        })
-      } */}
       <div id="sectionJuego">
       {
         imagenes.map((imagen, index) => {
           return (
-          <div className='divJuego'>
-            <img id={'img'+index} key={index} src={imagen}></img>
+          <div key={index} className='divJuego'>
+            <img id={'img'+index} src={imagen}></img>
           </div>
           )
         })
       }
       </div>
-      <div><label>¿Dime uno de los tres pokemons?</label><input id="input" type="text" onChange={e=>setPokemon(e.target.value)} value={pokemon}/>
+      <div><label>¿Dime uno de los tres pokemons?</label><input placeholder='vaporeon' id="input" type="text" onChange={e=>setPokemon(e.target.value)} value={pokemon}/>
       <button id='button' onClick={adivinar}>Adivinar</button><button id='button2' onClick={nuevoJuego}>Nuevo juego</button></div>
       <div><label>Puntuación: {puntuacion}</label></div>
-
-
-
     </>
   )
 }

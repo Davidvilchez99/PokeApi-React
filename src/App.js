@@ -26,20 +26,6 @@ function App() {
       setlistaPokemons(listaPokemons.concat(listaPokemon.results));
       setUrlPokeApi(listaPokemon.next);
       setIsLoaded(true);
-      // for (let i=0; i<listaPokemon.results.length; i++){
-      //   fetch("https://pokeapi.co/api/v2/pokemon/"+listaPokemon.results[i].name)
-      //   .then((response) => response.json())  
-      //   .then((datos) => { 
-      //     console.log(datos);
-      //     setpokemonDetalles(pokemonDetalles.push(datos));
-      //     console.log(pokemonDetalles);
-      //     // for (let j=0; j<datos.length; j++){
-      //     //   setpokemonDetalle(pokemonDetalle.push(datos[j]));
-      //     //   console.log(pokemonDetalle);
-      //     // }
-    
-      //   })
-      //   }
     });
 
 
@@ -48,14 +34,6 @@ function App() {
 
   function traerMas(){
     cargaTodos();
-  }
-  function FunctpokemonDetalle(){
-    // fetch("https://pokeapi.co/api/v2/pokemon/"+name)
-    // .then((response) => response.json())  
-    // .then((ola) => { 
-    //   setpokemonDetalle(ola);
-    //   console.log(ola);
-    // });
   }
 
   if (isLoaded){
@@ -71,7 +49,7 @@ function App() {
         }
         </div>
   
-        <button onClick={traerMas}>Cargar mas</button>
+        <button id='cargarMas' onClick={traerMas}>Cargar mas</button>
   
   
       </>
