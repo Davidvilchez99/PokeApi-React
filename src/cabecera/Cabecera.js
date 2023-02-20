@@ -1,37 +1,88 @@
 import './Cabecera.css';
-import Navigation from '../navigation/navigation.js'
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from 'react-router-dom';
+import { auth } from '../firebaseConfig';
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-// function Item({ name, isPacked }) {
-//     if (isPacked) {
-//       return <li className="item">{name} ✔</li>;
-//     }
-//     return <li className="item">{name}</li>;
-//   }
+  export default function Cabecera() {
+    const navigate = useNavigate();
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+        setLogueado(estaLogueado = true);
+        setCorreo(correo = user.email);
+        console.log("logueado")
+        } else {
+         setLogueado(estaLogueado = false);
+          console.log("no logueado")
+        }
+      });
+  }, []);
 
-  
-  export default function PackingList() {
-    const { id } = useParams();
-    return (
-      <>
-      <section>
-        <h1>Cabecera id ={id}</h1>
-        {/* <ul>
-          <Item 
-            isPacked={true} 
-            name="Space suit" 
-          />
-          <Item 
-            isPacked={true} 
-            name="Helmet with a golden leaf" 
-          />
-          <Item 
-            isPacked={false} 
-            name="Photo of Tam" 
-          />
-        </ul> */}
-      </section>
+    var [estaLogueado, setLogueado] = useState("");
+    var [correo, setCorreo] = useState("");
+
+
+    function logOut() {
+      auth.signOut().then(() => {
+        console.log("saliste")
+        navigate("/");
+      }).catch((error) => {
+        console.log("no saliste")
+      });
+    }
+
+
+    if (estaLogueado == true) {
+      return <>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">DVA Pokemons</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <Link to=""><a class="nav-link active" aria-current="page">Home</a></Link></li>
+        <li class="nav-item">
+        <Link to="pokemons"><a class="nav-link active" aria-current="page">Pokemons</a></Link></li>
+        <li class="nav-item">
+        <Link to="jugar"><a class="nav-link active" aria-current="page">Jugar</a></Link></li>
+        <li class="nav-item">
+        <Link to=""><a onClick={logOut} class="nav-link active" aria-current="page">Salir ({correo})</a></Link></li>
+      </ul>
+    </div>
+  </div>
+</nav>
       </>
-    );
+  }
+  else{
+    return <>
+    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">DVA Pokemons</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        <Link to=""><a class="nav-link active" aria-current="page">Home</a></Link></li>
+        <li class="nav-item">
+        <Link to="pokemons"><a class="nav-link active" aria-current="page">Pokemons</a></Link></li>
+        <li class="nav-item">
+        {/* <Link to="/jugar"><a class="nav-link active" aria-current="page">Juega</a></Link></li>
+        <li class="nav-item"> */}
+        <Link to="login"><a class="nav-link active" aria-current="page">Login</a></Link></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+      </>
+  }
   }
   

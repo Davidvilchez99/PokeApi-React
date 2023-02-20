@@ -4,7 +4,6 @@ import {  useState, useEffect } from 'react';
 import PokemonDetalle from './pokemonDetalle/Ejercicio';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cabecera from './cabecera/Cabecera.js';
-import  Navigation from './navigation/navigation.js'; 
 import  PokemonVista from './detallePokemonVista/Ejercicio.js'; 
 import  Jugar from './jugar/jugar.js'; 
 
@@ -16,6 +15,7 @@ function App() {
   const [listaPokemons, setlistaPokemons] = useState([]);
   const [urlPokeApi, setUrlPokeApi]  = useState("https://pokeapi.co/api/v2/pokemon?limit=9");
   const [pokemonDetalles, setpokemonDetalles]  = useState([]);
+  const [isLoaded, setIsLoaded]  = useState(false);
 
   useEffect ( ()=> cargaTodos(), []);
   function cargaTodos(){
@@ -25,7 +25,7 @@ function App() {
       setNumPokemons( listaPokemon.count);
       setlistaPokemons(listaPokemons.concat(listaPokemon.results));
       setUrlPokeApi(listaPokemon.next);
-
+      setIsLoaded(true);
       // for (let i=0; i<listaPokemon.results.length; i++){
       //   fetch("https://pokeapi.co/api/v2/pokemon/"+listaPokemon.results[i].name)
       //   .then((response) => response.json())  
@@ -57,26 +57,25 @@ function App() {
     //   console.log(ola);
     // });
   }
-  return (
-    <>
-    {/* {numPokemons} */}
 
-
-  <div id="demo">
-
-        {
-        listaPokemons.map((pokemon)=>
-        <PokemonDetalle pokemon={pokemon.name}/>
-          )
-      }
-      </div>
-
-      <button onClick={traerMas}>Cargar mas</button>
-
-
-    </>
+  if (isLoaded){
+    return     <>
     
-  );
+
+    <div id="demo">
+  
+          {
+          listaPokemons.map((pokemon)=>
+          <PokemonDetalle pokemon={pokemon.name}/>
+            )
+        }
+        </div>
+  
+        <button onClick={traerMas}>Cargar mas</button>
+  
+  
+      </>
+  }
 }
 
 export default App;

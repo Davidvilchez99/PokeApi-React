@@ -1,10 +1,27 @@
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import {db} from '../firebaseConfig.js';
 import { useState, useEffect } from 'react';
+import { doc, updateDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebaseConfig';
 
 
 export default function ListaDatos() {
   const [recordatorios, setRecordatorios] = useState([]);
+  var [estaLogueado, setLogueado] = useState("");
+  var [correo, setCorreo] = useState("");
+  var [puntuacion, setPuntuacion] = useState("");
+  var [datosUsuario, setDatosUsuario] = useState([]);
+
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //   setLogueado(estaLogueado = true);
+  //   setCorreo(correo = user.email);
+  //   setDatosUsuario(datosUsuario = recordatorios.filter((recordatorio)=>recordatorio.usuario === correo));
+  //   } else {
+  //    setLogueado(estaLogueado = false);
+  //   }
+  // });
 
   const leerDatosFirestore = async () => {
     await getDocs(collection(db, "listaDatos"))
@@ -18,8 +35,10 @@ export default function ListaDatos() {
 }
 useEffect(()=>{
   leerDatosFirestore();
+
 }, []);
 
+  
   const escribeDatos = async () => {   
     try {
         const docRef = await addDoc(collection(db, "listaDatos"), {
@@ -35,8 +54,13 @@ useEffect(()=>{
       <>
       <button onClick={escribeDatos}>Escribe</button>
     {
-      recordatorios.map((recordatorio=>
-        <p key={recordatorio.name}>{recordatorio.name}</p>))
+        
+        datosUsuario.map((recordatorio=>
+        <>
+        <p key={recordatorio.usaurio}>{recordatorio.usuario}</p>
+        <p>{recordatorio.puntuacion}</p>
+        </>
+        ))
     }
       </>
     );
